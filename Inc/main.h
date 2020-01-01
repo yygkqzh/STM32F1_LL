@@ -72,14 +72,14 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define KEY1_Pin LL_GPIO_PIN_13
 #define KEY1_GPIO_Port GPIOC
-#define KEY0_Pin LL_GPIO_PIN_0
+#define KEY0_Pin LL_GPIO_PIN_1
 #define KEY0_GPIO_Port GPIOC
 #define WK_UP_Pin LL_GPIO_PIN_0
 #define WK_UP_GPIO_Port GPIOA
 #define LED0_Pin LL_GPIO_PIN_8
 #define LED0_GPIO_Port GPIOA
-#define KED1_Pin LL_GPIO_PIN_2
-#define KED1_GPIO_Port GPIOD
+#define LED1_Pin LL_GPIO_PIN_2
+#define LED1_GPIO_Port GPIOD
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

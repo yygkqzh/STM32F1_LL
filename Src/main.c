@@ -93,9 +93,9 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
-//  MX_SPI1_Init();
+  MX_SPI1_Init();
   MX_USART1_UART_Init();
-//  MX_FATFS_Init();
+  MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -104,6 +104,16 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    if (LL_GPIO_IsOutputPinSet(KEY0_GPIO_Port,KEY0_Pin) == 1)
+    {
+      LL_GPIO_ResetOutputPin(LED0_GPIO_Port,LED0_Pin);
+    }
+    else
+    {
+      LL_GPIO_SetOutputPin(LED0_GPIO_Port,LED0_Pin);
+    }
+    
+    
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

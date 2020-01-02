@@ -28,7 +28,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "GPIO_Demo.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -72,7 +72,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -97,23 +96,15 @@ int main(void)
   MX_USART1_UART_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
-
+  
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    if (LL_GPIO_IsOutputPinSet(KEY0_GPIO_Port,KEY0_Pin) == 1)
-    {
-      LL_GPIO_ResetOutputPin(LED0_GPIO_Port,LED0_Pin);
-    }
-    else
-    {
-      LL_GPIO_SetOutputPin(LED0_GPIO_Port,LED0_Pin);
-    }
-    
-    
+		Led();
+    LL_mDelay(1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -129,35 +120,32 @@ void SystemClock_Config(void)
 {
   LL_FLASH_SetLatency(LL_FLASH_LATENCY_2);
 
-   if(LL_FLASH_GetLatency() != LL_FLASH_LATENCY_2)
+  if (LL_FLASH_GetLatency() != LL_FLASH_LATENCY_2)
   {
-    Error_Handler();  
+    Error_Handler();
   }
   LL_RCC_HSE_Enable();
 
-   /* Wait till HSE is ready */
-  while(LL_RCC_HSE_IsReady() != 1)
+  /* Wait till HSE is ready */
+  while (LL_RCC_HSE_IsReady() != 1)
   {
-    
   }
   LL_RCC_HSE_EnableCSS();
   LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSE_DIV_1, LL_RCC_PLL_MUL_9);
   LL_RCC_PLL_Enable();
 
-   /* Wait till PLL is ready */
-  while(LL_RCC_PLL_IsReady() != 1)
+  /* Wait till PLL is ready */
+  while (LL_RCC_PLL_IsReady() != 1)
   {
-    
   }
   LL_RCC_SetAHBPrescaler(LL_RCC_SYSCLK_DIV_1);
   LL_RCC_SetAPB1Prescaler(LL_RCC_APB1_DIV_2);
   LL_RCC_SetAPB2Prescaler(LL_RCC_APB2_DIV_1);
   LL_RCC_SetSysClkSource(LL_RCC_SYS_CLKSOURCE_PLL);
 
-   /* Wait till System clock is ready */
-  while(LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
+  /* Wait till System clock is ready */
+  while (LL_RCC_GetSysClkSource() != LL_RCC_SYS_CLKSOURCE_STATUS_PLL)
   {
-  
   }
   LL_Init1msTick(72000000);
   LL_SYSTICK_SetClkSource(LL_SYSTICK_CLKSOURCE_HCLK);
@@ -180,7 +168,7 @@ void Error_Handler(void)
   /* USER CODE END Error_Handler_Debug */
 }
 
-#ifdef  USE_FULL_ASSERT
+#ifdef USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number
   *         where the assert_param error has occurred.
@@ -189,10 +177,11 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(uint8_t *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+     printf("Wrong parameters value: file %s on line %d\r\n", file, line);
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

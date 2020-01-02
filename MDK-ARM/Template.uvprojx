@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_FULL_LL_DRIVER,USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FatFs/src;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FatFs/src;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;..\Demos\Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -572,6 +572,16 @@
               <FileName>syscall.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Middlewares/Third_Party/FatFs/src/option/syscall.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Application/Demos</GroupName>
+          <Files>
+            <File>
+              <FileName>GPIO_Demo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Demos\Src\GPIO_Demo.c</FilePath>
             </File>
           </Files>
         </Group>

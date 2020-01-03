@@ -23,6 +23,7 @@
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "UART_Demo.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -32,7 +33,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
- 
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -56,7 +57,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-
+extern PCD_HandleTypeDef hpcd_USB_FS;
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -231,6 +232,18 @@ void DMA1_Channel3_IRQHandler(void)
 void DMA1_Channel4_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Channel4_IRQn 0 */
+  if (LL_DMA_IsActiveFlag_TC4(DMA1) != 0)
+  {
+    LL_DMA_ClearFlag_TC4(DMA1);
+  }
+  else if (LL_DMA_IsActiveFlag_GI4(DMA1) != 0)
+  {
+    LL_DMA_ClearFlag_GI4(DMA1);
+  }
+  else if (LL_DMA_IsActiveFlag_HT4(DMA1) != 0)
+  {
+    LL_DMA_ClearFlag_TE4(DMA1);
+  }
 
   /* USER CODE END DMA1_Channel4_IRQn 0 */
   
@@ -254,6 +267,34 @@ void DMA1_Channel5_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles USB high priority or CAN TX interrupts.
+  */
+void USB_HP_CAN1_TX_IRQHandler(void)
+{
+  /* USER CODE BEGIN USB_HP_CAN1_TX_IRQn 0 */
+
+  /* USER CODE END USB_HP_CAN1_TX_IRQn 0 */
+  HAL_PCD_IRQHandler(&hpcd_USB_FS);
+  /* USER CODE BEGIN USB_HP_CAN1_TX_IRQn 1 */
+
+  /* USER CODE END USB_HP_CAN1_TX_IRQn 1 */
+}
+
+/**
+  * @brief This function handles USB low priority or CAN RX0 interrupts.
+  */
+void USB_LP_CAN1_RX0_IRQHandler(void)
+{
+  /* USER CODE BEGIN USB_LP_CAN1_RX0_IRQn 0 */
+
+  /* USER CODE END USB_LP_CAN1_RX0_IRQn 0 */
+  HAL_PCD_IRQHandler(&hpcd_USB_FS);
+  /* USER CODE BEGIN USB_LP_CAN1_RX0_IRQn 1 */
+
+  /* USER CODE END USB_LP_CAN1_RX0_IRQn 1 */
+}
+
+/**
   * @brief This function handles SPI1 global interrupt.
   */
 void SPI1_IRQHandler(void)
@@ -272,7 +313,23 @@ void SPI1_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-
+  if (LL_USART_IsActiveFlag_IDLE(USART1) != 0)
+  {
+    uart_receive_dma_callback();
+  }  
+  else if (LL_USART_IsActiveFlag_RXNE(USART1) && LL_USART_IsEnabledIT_RXNE(USART1))
+  {
+    uart_receive_interrupt_callback();
+  }
+  else if (LL_USART_IsEnabledIT_TC(USART1) != 0)
+  {
+    LL_USART_ClearFlag_TC(USART1);
+    LL_DMA_DisableChannel(DMA1, LL_DMA_CHANNEL_4);
+  }
+  else if (LL_USART_IsActiveFlag_ORE(USART1) != 0)
+  {
+    LL_USART_ClearFlag_ORE(USART1);
+  }
   /* USER CODE END USART1_IRQn 0 */
   /* USER CODE BEGIN USART1_IRQn 1 */
 

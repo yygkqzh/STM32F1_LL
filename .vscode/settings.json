@@ -1,7 +1,9 @@
 {
     "files.associations": {
         "gpio_demo.h": "c",
-        "main.h": "c"
+        "main.h": "c",
+        "uart_demo.h": "c",
+        "string.h": "c"
     },
     "C_Cpp.default.compilerPath": "/bin/arm-none-eabi-gcc.exe"
 }

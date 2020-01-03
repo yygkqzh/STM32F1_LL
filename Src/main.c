@@ -96,15 +96,14 @@ int main(void)
   MX_USART1_UART_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
-  
+  Led();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		Led();
-    LL_mDelay(1);
+		
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

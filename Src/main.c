@@ -21,7 +21,6 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "dma.h"
-#include "fatfs.h"
 #include "spi.h"
 #include "usart.h"
 #include "usb_device.h"
@@ -31,7 +30,7 @@
 /* USER CODE BEGIN Includes */
 #include "GPIO_Demo.h"
 #include "UART_Demo.h"
-
+#include "W25Qxx.h"
 #include "usbd_conf.h"
 #include "usbd_cdc.h"
 #include "usbd_desc.h"
@@ -103,7 +102,6 @@ int main(void)
   MX_DMA_Init();
   MX_SPI1_Init();
   MX_USART1_UART_Init();
-  MX_FATFS_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
   //uart_interrupt_receive_configuration();

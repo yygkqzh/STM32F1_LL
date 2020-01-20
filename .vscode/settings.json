@@ -3,7 +3,9 @@
         "gpio_demo.h": "c",
         "main.h": "c",
         "uart_demo.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "spi_demo.h": "c",
+        "w25qxx.h": "c"
     },
     "C_Cpp.default.compilerPath": "/bin/arm-none-eabi-gcc.exe"
 }
